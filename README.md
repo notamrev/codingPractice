@@ -5,6 +5,6 @@ clang++ main.cpp -o main
 ```
 then run 
 ```bash
-./main < input.txt > output.txt
+./main < ../input.txt > ../output.txt
 ```
 
