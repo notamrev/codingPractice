@@ -3,10 +3,12 @@
 *"When I ran `kubectl apply -f baseline-nginx.yaml`, what actually happened and what did each fucking thing do?*
 #### Layer 1
 Two kinds of machines in a cluster
-| CONTROL PLANE | WORKER NODE(S) |
-| "The brain" | "The Muscle" |
-| Decides WHAT should run | Actually RUNS the containers |
-| Decides WHERE | Reports back the health|
+| **CONTROL PLANE**                      | **WORKER NODE(S)**                         |
+| -------------------------------------- | ------------------------------------------ |
+| **The Brain**                          | **The Muscle**                             |
+| Decides **what** should run            | Actually **runs** the containers           |
+| Decides **where** workloads should run | Reports back the node and container health |
+
 
 In a true deployment these are usually seperated out into two parts/two machines. In KIND they become a single entity
 `control-plane` = lab simplification not how it works at scale.
