@@ -48,7 +48,7 @@ ContainerD is just a slave straight up pulls and runs. Doesn't start stop based 
 5. `kube-scheduler` notices the unscheduled pod and picks a node. writes the decision back via the API server.
 6. `kubelet` - On the node notices a pod is assigned to it. It asks containerD to pull the container and run with the configuration provided.
 7. `kindnet` (CNI) - assigns the pod to its own IP address.
-8. `seperately` kube-apiserver also created your Service object. CoreDNS picks it up adn creates a DNS entry for "baseline-nginx"
+8. `seperately` kube-apiserver also created your Service object. CoreDNS picks it up and creates a DNS entry for "baseline-nginx"
 kubeproxy also handles routing for this by setting up rules.
 
 A rule of thumb nothing here talks to each other they all interact with the kube-apiserver, and everyone _watches_ it for changes relevant to them.
