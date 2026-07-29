@@ -1,10 +1,1 @@
-Cd into folder
-run 
-```bash
-clang++ main.cpp -o main
-```
-then run 
-```bash
-./main < ../input.txt > ../output.txt
-```
-
+Honestly I don't know how long I will stick to this but maybe one day.
