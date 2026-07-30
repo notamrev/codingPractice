@@ -38,29 +38,6 @@ Key Terminology:
 5. Translation direction: Virtual address (from process) -> physical address (via page table) - not the reverse 
 
 
-#### The TLB - caching the page table lookup 
-Page table also lives in the RAM so whenever memory is needed you have to access the RAM for the table then for the actual memory you want to access.
-
-CPU wants the memory address -> Locate the Page table -> Read the actual data after the page table access
-
-- Here every single memory access now costs 2 RAM trips instead of one - double your effective memory latency, for every load and store the program ever does.
-This affects more than expected since RAM is much slower than the CPU.
-
-The fix: Have a quick access cache, dedicated hardware cache that stores recent virtual -> physical translations, sitting right on the CPU next to the registers
-Known as the TLB.
-
-CPU wants to read virtual address
-1. Check TLB first, right on-chip, nanoseconds.
-2. TLB Hit - Use that cache
-3. TLB Miss - Walk the page in RAM add to TLB
-4. Readh the actual data.
-
-Notes:
-- TLB = Hardware cache of recent virtual -> physical translations
-- TLB Hit = nanoseconds on chip, TLB Miss = Fall back to page table walk in RAM, then cache the result
-- Hugepages exist specifically to reduce TLB misses for large memory processes (fewer bigger pages = fewer entries needed to cover the same memory)
-- TLB Thrashing shows up at elevated CPU-per-work (CPI), not directly visible in normal APM - needs perf stat / dTLB-load-misses to actually diagnose.
-
 #### Demand Paging 
 - Don't load a page in the RAM until a process truly needs it.
 So how it works is the initial page is loaded for the process to run. It then requests data and the CPU tries to locate it. It runs into a PAGE FAULT (page miss) CPU notices hey this isn't allocated a page then adds the required page. The instruction that failed and faulted is restarted and captures the new page.
